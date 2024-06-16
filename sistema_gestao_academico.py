@@ -11,7 +11,7 @@ def menu_sistema_principal():
             input(
                 """
     =============================Menu - Navegação=================================
-     [0] Exit [1] Estudantes [2] Diciplinas [3] Professor [4] Turma [5] Matrícula
+     [0] Exit [1] Estudantes [2] Disciplinas [3] Professor [4] Turma [5] Matrícula
     ==============================================================================
     """
             )
@@ -20,7 +20,7 @@ def menu_sistema_principal():
         if opcao == 1:
             estudantes()
         elif opcao == 2:
-            dicilinas()
+            disciplinas()
         elif opcao == 3:
             professor()
         elif opcao == 4:
@@ -64,30 +64,30 @@ def estudantes():
         print("Voltando ao menu principal")
 
 
-def dicilinas():
+def disciplinas():
     opcao = -1
     while opcao != 0:
         opcao = int(
             input(
                 """
-    ===================Menu - Diciplinas=======================
+    ===================Menu - Disciplinas=======================
      [0] Voltar [1] Incluir [2] Listar [3] Atualizar [4] Excluir
     ===========================================================
     """
             )
         )
         if opcao == 1:
-            print("Incluir dicilinas")
+            print("Incluir Disciplina")
         elif opcao == 2:
-            print("Listar dicilinas")
+            print("Listar Disciplina")
         elif opcao == 3:
-            print("Atualizar dicilinas")
+            print("Atualizar Disciplina")
         elif opcao == 4:
-            print("Excluir dicilinas")
+            print("Excluir Disciplina")
         elif opcao < 0 or opcao >= 5:
             print("Opção Inválida")
         elif opcao == 0:
-            print("Saindo do menu Diciplinas")
+            print("Saindo do menu Disciplinas")
     else:
         print("Voltando ao menu Principal")
 
