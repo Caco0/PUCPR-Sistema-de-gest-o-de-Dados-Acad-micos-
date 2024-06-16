@@ -1,4 +1,5 @@
 def menu_sistema_principal():
+    """_Função de menu de navegação do sistema_"""
     opcao = -1
     while opcao != 0:
         opcao = int(
@@ -15,15 +16,15 @@ def menu_sistema_principal():
         )
 
         if opcao == 1:
-            estudantes(opcao=1)
+            menu_secundario(opcao=1)
         elif opcao == 2:
-            estudantes(opcao=2)
+            menu_secundario(opcao=2)
         elif opcao == 3:
-            estudantes(opcao=3)
+            menu_secundario(opcao=3)
         elif opcao == 4:
-            estudantes(opcao=4)
+            menu_secundario(opcao=4)
         elif opcao == 5:
-            estudantes(opcao=5)
+            menu_secundario(opcao=5)
         elif opcao < 0 or opcao > 5:
             print("Opção inválida")
         elif opcao == 0:
@@ -33,7 +34,8 @@ def menu_sistema_principal():
         print("Saindo do Sistema")
 
 
-def estudantes(opcao):
+def menu_secundario(opcao):
+    """Função secundária do menu recebe como parâmetro o nome da escolha"""
     if opcao == 1:
         menu_nome = "Estudante"
     elif opcao == 2:
@@ -70,7 +72,7 @@ def estudantes(opcao):
         elif caso < 0 or opcao >= 5:
             print("Opção inválida")
         elif caso == 0:
-            print("Saindo...")
+            print("Voltando...")
     else:
         print("Voltando ao menu principal")
 
