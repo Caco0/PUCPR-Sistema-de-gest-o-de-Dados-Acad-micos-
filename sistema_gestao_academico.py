@@ -1,3 +1,8 @@
+"""
+Nome: Rafael fortunato Dametto
+Curso: Tecnologia em Inteligência Artificial Aplicada
+"""
+
 """Variáveis globais"""
 
 estudantes = []
@@ -121,6 +126,7 @@ Digite o nome do estudante:
 
 
 def listar_estudantes():
+    """_Função de Listagem de Alunos_"""
     if len(estudantes) == 0:
         print("Nenhum estudante cadastrado.")
     else:
