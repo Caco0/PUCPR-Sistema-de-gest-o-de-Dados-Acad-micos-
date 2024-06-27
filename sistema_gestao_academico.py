@@ -5,8 +5,9 @@ Curso: Tecnologia em Inteligência Artificial Aplicada
 
 """Variáveis globais"""
 
-estudantes = []
+estudantes = {}
 adicionar_mais = -1
+aluno = []
 
 
 def menu_sistema_principal():
@@ -83,9 +84,13 @@ def menu_secundario(opcao):
             else:
                 print(f"Listar {menu_nome} está em Desenvolvimento")
         elif caso == 3:
-            print(f"Atualizar {menu_nome} está em Desenvolvimento")
+            if menu_nome == "Estudante":
+                atualizar_aluno()
+            else:
+                print(f"Atualizar {menu_nome} está em Desenvolvimento")
         elif caso == 4:
-            print(f"Excluir {menu_nome} está em Desenvolvimento")
+            if menu_nome == "Estudante":
+                exclui_aluno()
         elif caso < 0 or opcao >= 5:
             print("Opção inválida")
         elif caso == 0:
@@ -97,15 +102,30 @@ def menu_secundario(opcao):
 def cadastro_estudantes():
     """_Função que grava o nome do estudante na lista_"""
     while True:
-        estudantes.append(
-            input(
-                """
+        # cria as variáveis nome, ra, e email e as solicita
+        ra = input(
+            """
 ===========Inserindo Estudante===========
-Digite o nome do estudante: 
+Digite o RA do estudante: 
 =========================================
 """
-            )
         )
+        nome = input(
+            """
+===========Inserindo Estudante===========
+Digite o Nome do estudante: 
+=========================================
+"""
+        )
+        email = input(
+            """
+===========Inserindo Estudante===========
+Digite o Email do estudante: 
+=========================================
+"""
+        )
+        # cria um dcionário com os dados do estudante
+        estudantes[ra] = {"nome": nome, "email": email}
         while True:
             adicionar_mais = int(
                 input(
@@ -130,8 +150,50 @@ def listar_estudantes():
     if len(estudantes) == 0:
         print("Nenhum estudante cadastrado.")
     else:
-        for item in estudantes:
-            print(item)
+        for chave, valor in estudantes.items():
+            print(chave, valor)
 
 
-menu_sistema_principal()
+def exclui_aluno():
+    """_Esta função exclui o aluno do RA selecionado do dicinário_"""
+    ra_aluno = input("Digite o Ra do aluno a ser Excluido: ")
+    # através do metodo pop() busca-se m aluno pela chave RA e o exclui,
+    # caso o aluno não exista, o programa retorna "RA não encontrado"
+    ra_excluido = estudantes.pop(ra_aluno, "")
+    if ra_excluido == "":
+        print("RA não encontrado")
+    else:
+        print(f"O aluno {ra_excluido} foi excluido com sucesso.")
+
+
+def atualizar_aluno():
+    """_Esta função atualiza o aluno do RA selecionado do dicinário_"""
+    ra = input(
+        """
+===========Inserindo Estudante===========
+Digite o RA do estudante: 
+=========================================
+"""
+    )
+    # Pede o novo nome do aluno
+    nome_novo = input(
+        """
+===========Inserindo Estudante===========
+Digite o novo nome do estudante: 
+=========================================
+"""
+    )
+    # Pede o novo email do aluno
+    email_novo = input(
+        """
+===========Inserindo Estudante===========
+Digite o novo email estudante: 
+=========================================
+"""
+    )
+    # Atualiza através do metodo update()
+    # o nome e o email do aluno sem alterar o RA
+    estudantes[ra].update({"nome": nome_novo, "email": email_novo})
+
+
+menu_sistema_principal()  # Chamada da função principal do sistema
