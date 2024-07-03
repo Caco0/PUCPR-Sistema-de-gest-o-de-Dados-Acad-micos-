@@ -68,6 +68,9 @@ Digite o Código do estudante:
 =========================================
 """
         )
+        if codigo in estudantes:
+            print("Código já cadastrado")
+            break
         nome = input(
             """
 ===========Inserindo Estudante===========
