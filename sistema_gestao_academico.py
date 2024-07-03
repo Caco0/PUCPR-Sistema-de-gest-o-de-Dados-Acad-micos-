@@ -70,6 +70,7 @@ Digite o Código do estudante:
         )
         if codigo in estudantes:
             print("Código já cadastrado")
+            print("Voltando ao Menu Estudante...")
             break
         nome = input(
             """
