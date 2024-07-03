@@ -3,6 +3,8 @@ Nome: Rafael fortunato Dametto
 Curso: Tecnologia em Inteligência Artificial Aplicada
 """
 
+import json
+
 
 def menu_secundario(opcao):
     """Função secundária do menu recebe como parâmetro o nome da escolha"""
@@ -32,7 +34,7 @@ def menu_secundario(opcao):
                 )
             )
         except:
-            print("Opção inválida, tente novamente")
+            print("Apenas números de 0 a 5 são permitidos")
             continue
 
         if caso == 1:
@@ -77,7 +79,7 @@ Digite o Código do estudante:
                 )
             )
         except:
-            print("Erro ao digitar o código do estudante, tente novamente!")
+            print("Erro somente números são permitidos")
             continue
 
         if codigo in estudantes:
@@ -116,16 +118,20 @@ Digite o CPF do estudante:
                 break
         if adicionar_mais == 0:
             print("Voltando...")
+            grava_arquivo_estudantes(estudantes, "estudantes")
             break
 
 
 def listar_estudantes(estudantes):
     """_Função de Listagem de Alunos_"""
     if len(estudantes) == 0:
-        print("Nenhum estudante cadastrado.")
+        print("Nenhum estudante cadastrado na memória: ")
     else:
         for chave, valor in estudantes.items():
-            print(chave, valor)
+            print(f"Estudantes na memória{chave}, {valor}")
+
+    lista_de_estudantes = ler_arquivo_estudantes("estudantes")
+    print(f"Estudantes salvos: \n{lista_de_estudantes}")
 
 
 def exclui_aluno(estudantes):
@@ -168,6 +174,25 @@ Digite o novo CPF estudante:
     # Atualiza através do metodo update()
     # o nome e o email do aluno sem alterar o RA
     estudantes[codigo].update({"Nome": nome_novo, "CPF": cpf_novo})
+
+
+def grava_arquivo_estudantes(estudantes, file):
+    """_Esta função grava o dicionário em um arquivo estudantes.json_"""
+    with open(file + ".json", "w", encoding="utf-8") as f:
+        json.dump(estudantes, f, ensure_ascii=False, indent=4)
+        f.close()
+
+
+def ler_arquivo_estudantes(estudantes):
+    """_Esta função lê o arquivo estudantes.json_"""
+    estudantes_arquivados = {}
+    try:
+        with open(estudantes + ".json", "r") as f:
+            estudantes_arquivados = json.load(f)
+            f.close()
+            return estudantes_arquivados
+    except FileNotFoundError:
+        print("Arquivo não encontrado")
 
 
 """Variáveis globais"""
