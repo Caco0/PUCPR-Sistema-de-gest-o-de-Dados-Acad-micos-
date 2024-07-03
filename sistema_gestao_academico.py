@@ -17,20 +17,24 @@ def menu_secundario(opcao):
     else:
         menu_nome = "Matrícula em Desenvolvimento"
 
-    caso = -1
-    while caso != 0:
-        caso = int(
-            input(
-                f"""
+    while True:
+        try:
+            caso = int(
+                input(
+                    f"""
 ====================Sistema de gestão de Dados Acadêmicos======================
 ===============================================================================
 
                     Menu - {menu_nome}
             [0] Voltar [1] Incluir [2] Listar [3] Atualizar [4] Excluir
 ===============================================================================
-    """
+        """
+                )
             )
-        )
+        except:
+            print("Opção inválida, tente novamente")
+            continue
+
         if caso == 1:
             if menu_nome == "Estudante":
                 cadastro_estudantes(estudantes)
@@ -52,22 +56,30 @@ def menu_secundario(opcao):
         elif caso < 0 or opcao >= 5:
             print("Opção inválida")
         elif caso == 0:
-            print("Voltando...")
-    else:
-        print("Voltando ao menu principal")
+            print("saindo...")
+            break
+        else:
+            print("Você digitou uma opção inválida")
 
 
 def cadastro_estudantes(estudantes):
     """_Função que grava o nome do estudante na lista_"""
     while True:
         # cria as variáveis nome, ra, e email e as solicita
-        codigo = input(
-            """
+        try:
+            codigo = int(
+                input(
+                    """
 ===========Inserindo Estudante===========
 Digite o Código do estudante: 
 =========================================
 """
-        )
+                )
+            )
+        except:
+            print("Erro ao digitar o código do estudante, tente novamente!")
+            continue
+
         if codigo in estudantes:
             print("Código já cadastrado")
             print("Voltando ao Menu Estudante...")
@@ -167,11 +179,11 @@ aluno = []
 
 def menu_sistema_principal():
     """_Função de menu de navegação do sistema_"""
-    opcao = -1
-    while opcao != 0:
-        opcao = int(
-            input(
-                """
+    while True:
+        try:
+            opcao = int(
+                input(
+                    """
 ====================Sistema de gestão de Dados Acadêmicos=====================
 ==============================================================================
 
@@ -179,9 +191,11 @@ def menu_sistema_principal():
 [0] Exit [1] Estudantes [2] Disciplinas [3] Professor [4] Turma [5] Matrícula
 ==============================================================================
     """
+                )
             )
-        )
-
+        except:
+            print("Opção inválida, tente novamente!")
+            continue
         if opcao == 1:
             menu_secundario(opcao=1)
         elif opcao == 2:
@@ -196,9 +210,9 @@ def menu_sistema_principal():
             print("Opção inválida")
         elif opcao == 0:
             print("Saindo...")
-
-    else:
-        print("Saindo do Sistema")
+            break
+        else:
+            print("Saindo do Sistema")
 
 
 menu_sistema_principal()  # Chamada da função principal do sistema
