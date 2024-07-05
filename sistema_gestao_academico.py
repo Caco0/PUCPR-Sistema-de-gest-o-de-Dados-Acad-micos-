@@ -10,14 +10,19 @@ def menu_secundario(opcao):
     """Função secundária do menu recebe como parâmetro o nome da escolha"""
     if opcao == 1:
         menu_nome = "Estudante"
+        chamador_menu_secundario = estudantes
     elif opcao == 2:
-        menu_nome = "Disciplinas em Desenvolvimento"
+        menu_nome = "Disciplinas"
+        chamador_menu_secundario = disciplinas
     elif opcao == 3:
-        menu_nome = "Professor em Desenvolvimento"
+        menu_nome = "Professor"
+        chamador_menu_secundario = professores
     elif opcao == 4:
-        menu_nome = "Turma em Desenvolvimento"
+        menu_nome = "Turma"
+        chamador_menu_secundario = turmas
     else:
-        menu_nome = "Matrícula em Desenvolvimento"
+        menu_nome = "Matrícula"
+        chamador_menu_secundario = matriculas
 
     while True:
         try:
@@ -39,32 +44,59 @@ def menu_secundario(opcao):
 
         if caso == 1:
             if menu_nome == "Estudante":
-                cadastro_estudantes(estudantes)
+                cadastro_geral(chamador_menu_secundario)
+            elif menu_nome == "Disciplinas":
+                cadastro_geral(chamador_menu_secundario)
+            elif menu_nome == "Professor":
+                cadastro_geral(chamador_menu_secundario)
+            elif menu_nome == "Turma":
+                cadastro_geral(chamador_menu_secundario)
             else:
-                print(f"Inserir {menu_nome} está em Desenvolvimento")
+                cadastro_geral(chamador_menu_secundario)
         elif caso == 2:
             if menu_nome == "Estudante":
-                listar_estudantes(estudantes)
+                listar_registros(chamador_menu_secundario)
+            elif menu_nome == "Disciplinas":
+                listar_registros(chamador_menu_secundario)
+            elif menu_nome == "Professor":
+                listar_registros(chamador_menu_secundario)
+            elif menu_nome == "Turma":
+                listar_registros(chamador_menu_secundario)
             else:
-                print(f"Listar {menu_nome} está em Desenvolvimento")
+                listar_registros(chamador_menu_secundario)
         elif caso == 3:
             if menu_nome == "Estudante":
-                atualizar_aluno(estudantes)
+                atualizar_registros(chamador_menu_secundario)
+            elif menu_nome == "Disciplinas":
+                atualizar_registros(chamador_menu_secundario)
+            elif menu_nome == "Professor":
+                atualizar_registros(chamador_menu_secundario)
+            elif menu_nome == "Turma":
+                atualizar_registros(chamador_menu_secundario)
             else:
-                print(f"Atualizar {menu_nome} está em Desenvolvimento")
+                atualizar_registros(chamador_menu_secundario)
         elif caso == 4:
             if menu_nome == "Estudante":
-                exclui_aluno(estudantes)
-        elif caso < 0 or opcao >= 5:
+                exclui_registros(chamador_menu_secundario)
+            elif menu_nome == "Disciplinas":
+                exclui_registros(chamador_menu_secundario)
+            elif menu_nome == "Professor":
+                exclui_registros(chamador_menu_secundario)
+            elif menu_nome == "Turma":
+                exclui_registros(chamador_menu_secundario)
+            else:
+                exclui_registros(chamador_menu_secundario)
+        elif caso < 0 or caso >= 5:
             print("Opção inválida")
         elif caso == 0:
             print("saindo...")
             break
         else:
             print("Você digitou uma opção inválida")
+    return chamador_menu_secundario
 
 
-def cadastro_estudantes(estudantes):
+def cadastro_geral(chamador_menu_secundario):
     """_Função que grava o nome do estudante na lista_"""
     while True:
         # cria as variáveis nome, ra, e email e as solicita
@@ -72,7 +104,7 @@ def cadastro_estudantes(estudantes):
             codigo = int(
                 input(
                     """
-===========Inserindo Estudante===========
+===========Inserindo Registro===========
 Digite o Código do estudante: 
 =========================================
 """
@@ -82,7 +114,7 @@ Digite o Código do estudante:
             print("Erro somente números são permitidos")
             continue
 
-        if codigo in estudantes:
+        if codigo in chamador_menu_secundario:
             print("Código já cadastrado")
             print("Voltando ao Menu Estudante...")
             break
@@ -101,7 +133,7 @@ Digite o CPF do estudante:
 """
         )
         # cria um dcionário com os dados do estudante
-        estudantes[codigo] = {"Nome": nome, "CPF": cpf}
+        chamador_menu_secundario[codigo] = {"Nome": nome, "CPF": cpf}
         while True:
             adicionar_mais = int(
                 input(
@@ -118,62 +150,70 @@ Digite o CPF do estudante:
                 break
         if adicionar_mais == 0:
             print("Voltando...")
-            grava_arquivo_estudantes(estudantes, "estudantes")
+            # grava_arquivo_estudantes(estudantes, "estudantes")
             break
 
 
-def listar_estudantes(estudantes):
+def listar_registros(chamador_menu_secundario):
     """_Função de Listagem de Alunos_"""
-    if len(estudantes) == 0:
+    if len(chamador_menu_secundario) == 0:
         print("Nenhum estudante cadastrado na memória: ")
     else:
-        for chave, valor in estudantes.items():
+        for chave, valor in chamador_menu_secundario.items():
             print(f"Estudantes na memória{chave}, {valor}")
 
-    lista_de_estudantes = ler_arquivo_estudantes("estudantes")
-    print(f"Estudantes salvos: \n{lista_de_estudantes}")
+    # lista_de_estudantes = ler_arquivo_estudantes("estudantes")
+    # print(f"Estudantes salvos: \n{lista_de_estudantes}")
 
 
-def exclui_aluno(estudantes):
+def exclui_registros(chamador_menu_secundario):
     """_Esta função exclui o aluno do RA selecionado do dicinário_"""
-    codigo_aluno = input("Digite o Ra do aluno a ser Excluido: ")
+    codigo_aluno = int(input("Digite o Ra do aluno a ser Excluido: "))
     # através do metodo pop() busca-se m aluno pela chave RA e o exclui,
     # caso o aluno não exista, o programa retorna "RA não encontrado"
-    codigo_excluido = estudantes.pop(codigo_aluno, "")
+    codigo_excluido = chamador_menu_secundario.pop(codigo_aluno, "")
     if codigo_excluido == "":
-        print("RA não encontrado")
+        print("Código não encontrado")
     else:
         print(f"O aluno {codigo_excluido} foi excluido com sucesso.")
 
 
-def atualizar_aluno(estudantes):
+def atualizar_registros(chamador_menu_secundario):
     """_Esta função atualiza o aluno do RA selecionado do dicinário_"""
-    codigo = input(
+    while True:
+        try:
+            codigo = int(
+                input(
+                    """
+        ===========Inserindo Estudante===========
+        Digite o Código do estudante: 
+        =========================================
         """
-===========Inserindo Estudante===========
-Digite o Código do estudante: 
-=========================================
-"""
-    )
-    # Pede o novo nome do aluno
-    nome_novo = input(
-        """
-===========Inserindo Estudante===========
-Digite o novo Nome do estudante: 
-=========================================
-"""
-    )
-    # Pede o novo email do aluno
-    cpf_novo = input(
-        """
-===========Inserindo Estudante===========
-Digite o novo CPF estudante: 
-=========================================
-"""
-    )
-    # Atualiza através do metodo update()
-    # o nome e o email do aluno sem alterar o RA
-    estudantes[codigo].update({"Nome": nome_novo, "CPF": cpf_novo})
+                )
+            )
+        except:
+            print("Erro somente números são permitidos")
+            # Pede o novo nome do aluno
+            continue
+        nome_novo = input(
+            """
+    ===========Inserindo Estudante===========
+    Digite o novo Nome do estudante: 
+    =========================================
+    """
+        )
+        # Pede o novo email do aluno
+        cpf_novo = input(
+            """
+    ===========Inserindo Estudante===========
+    Digite o novo CPF estudante: 
+    =========================================
+    """
+        )
+        # Atualiza através do metodo update()
+        # o nome e o email do aluno sem alterar o RA
+        chamador_menu_secundario[codigo].update({"Nome": nome_novo, "CPF": cpf_novo})
+        break
 
 
 def grava_arquivo_estudantes(estudantes, file):
@@ -198,6 +238,10 @@ def ler_arquivo_estudantes(estudantes):
 """Variáveis globais"""
 
 estudantes = {}
+disciplinas = {}
+professores = {}
+turmas = {}
+matriculas = {}
 adicionar_mais = -1
 aluno = []
 
