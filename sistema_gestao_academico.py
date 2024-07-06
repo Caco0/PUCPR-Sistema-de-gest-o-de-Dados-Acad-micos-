@@ -150,19 +150,24 @@ def menu_secundario(opcao):
                     "está habilitado para bolsa?",
                 )
                 grava_arquivos(chamador_menu_secundario, "matriculas")
-        # seleciona através do código o registro a ser apagado, apaga e imprime na tela
-        # o registro apagado
+        # seleciona através do código o registro a ser apagado, apaga
+        # e imprime na tela o registro apagado
         elif caso == 4:
             if menu_nome == "Estudante":
                 exclui_registros(chamador_menu_secundario, "Estudante")
+                grava_arquivos(chamador_menu_secundario, "estudantes")
             elif menu_nome == "Disciplinas":
                 exclui_registros(chamador_menu_secundario, "Disciplina")
+                grava_arquivos(chamador_menu_secundario, "disciplinas")
             elif menu_nome == "Professor":
                 exclui_registros(chamador_menu_secundario, "Professor")
+                grava_arquivos(chamador_menu_secundario, "professores")
             elif menu_nome == "Turma":
                 exclui_registros(chamador_menu_secundario, "Turma")
+                grava_arquivos(chamador_menu_secundario, "turmas")
             else:
                 exclui_registros(chamador_menu_secundario, "Matricula")
+                grava_arquivos(chamador_menu_secundario, "matriculas")
         elif caso < 0 or caso >= 5:
             print("Opção inválida")
         elif caso == 0:
