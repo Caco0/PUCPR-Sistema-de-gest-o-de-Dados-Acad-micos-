@@ -1,5 +1,5 @@
 """
-Nome: Rafael fortunato Dametto
+Nome: Rafael Fortunato Dametto
 Curso: Tecnologia em Inteligência Artificial Aplicada
 """
 
@@ -41,14 +41,15 @@ def menu_secundario(opcao):
         except:
             print("Apenas números de 0 a 5 são permitidos")
             continue
-
+        # chama o cadastro geral por setor e em seguida grava em seu
+        # arquivo específico
         if caso == 1:
             if menu_nome == "Estudante":
                 cadastro_geral(
                     chamador_menu_secundario,
                     "Estudante",
-                    "o código do Estudante",
-                    "nome do Estudante",
+                    "código do Estudante",
+                    "Nome do Estudante",
                     "CPF",
                 )
                 grava_arquivos(chamador_menu_secundario, "estudantes")
@@ -56,7 +57,7 @@ def menu_secundario(opcao):
                 cadastro_geral(
                     chamador_menu_secundario,
                     "Disciplina",
-                    "o código do Disciplina",
+                    "código do Disciplina",
                     "nome da Disciplina",
                     "aplicável em qtos Cursos",
                 )
@@ -65,7 +66,7 @@ def menu_secundario(opcao):
                 cadastro_geral(
                     chamador_menu_secundario,
                     "Professor",
-                    "o código do Professor",
+                    "código do Professor",
                     "nome do Professor",
                     "responsável por qtas turmas",
                 )
@@ -74,20 +75,22 @@ def menu_secundario(opcao):
                 cadastro_geral(
                     chamador_menu_secundario,
                     "Turma",
-                    "o código do Turma",
-                    "o tipo do Curso",
-                    "o Nome do Curso",
+                    "código do Turma",
+                    "tipo do Curso",
+                    "Nome do Curso",
                 )
                 grava_arquivos(chamador_menu_secundario, "turmas")
             else:
                 cadastro_geral(
                     chamador_menu_secundario,
                     "Matrícula",
-                    "o código Matrícula",
-                    "o código do Estudante",
+                    "código Matrícula",
+                    "código do Estudante",
                     "está habilitado para bolsa?",
                 )
                 grava_arquivos(chamador_menu_secundario, "matriculas")
+        # Lê a memória listada por setor específico, e imprime o arquivo
+        # gravado também por setor
         elif caso == 2:
             if menu_nome == "Estudante":
                 ler_arquivo("estudantes")
@@ -104,15 +107,17 @@ def menu_secundario(opcao):
             else:
                 ler_arquivo("matriculas")
                 listar_registros(chamador_menu_secundario, "Matriculas")
+        # Atualiza os registros por setor e em seguida grava novamente
+        # no arquivo
         elif caso == 3:
             if menu_nome == "Estudante":
                 atualizar_registros(
                     chamador_menu_secundario,
                     "código do Estudante",
-                    "nome do Estudante",
+                    "Nome do Estudante",
                     "CPF",
                 )
-                grava_arquivos(chamador_menu_secundario, "estudante")
+                grava_arquivos(chamador_menu_secundario, "estudantes")
             elif menu_nome == "Disciplinas":
                 atualizar_registros(
                     chamador_menu_secundario,
@@ -128,7 +133,7 @@ def menu_secundario(opcao):
                     "nome do Professor",
                     "responsável por qtas turmas",
                 )
-                grava_arquivos(chamador_menu_secundario, "professor")
+                grava_arquivos(chamador_menu_secundario, "professores")
             elif menu_nome == "Turma":
                 atualizar_registros(
                     chamador_menu_secundario,
@@ -136,7 +141,7 @@ def menu_secundario(opcao):
                     "tipo do Curso",
                     "Nome do Curso",
                 )
-                grava_arquivos(chamador_menu_secundario, "turma")
+                grava_arquivos(chamador_menu_secundario, "turmas")
             else:
                 atualizar_registros(
                     chamador_menu_secundario,
@@ -144,12 +149,14 @@ def menu_secundario(opcao):
                     "código do Estudante",
                     "está habilitado para bolsa?",
                 )
-                grava_arquivos(chamador_menu_secundario, "matricula")
+                grava_arquivos(chamador_menu_secundario, "matriculas")
+        # seleciona através do código o registro a ser apagado, apaga e imprime na tela
+        # o registro apagado
         elif caso == 4:
             if menu_nome == "Estudante":
                 exclui_registros(chamador_menu_secundario, "Estudante")
             elif menu_nome == "Disciplinas":
-                exclui_registros(chamador_menu_secundario, "Diciplina")
+                exclui_registros(chamador_menu_secundario, "Disciplina")
             elif menu_nome == "Professor":
                 exclui_registros(chamador_menu_secundario, "Professor")
             elif menu_nome == "Turma":
@@ -168,10 +175,10 @@ def menu_secundario(opcao):
 
 def cadastro_geral(
     chamador_menu_secundario,
-    nome_novo,
-    texto1,
-    texto2,
-    texto3,
+    nome_novo,  # nome da opção escolhida para imprimir na tela
+    texto1,  # primeira pergunta, segundo a OPÇÃO escolhida
+    texto2,  # segunda pergunta, segundo a OPÇÃO escolhida
+    texto3,  # terceira pergunta, segundo a OPÇÃO escolhida
 ):
     """_Função que grava o nome do estudante na lista_"""
     while True:
@@ -208,7 +215,7 @@ Digite {texto3}:
 =========================================
 """
         )
-        # cria um dcionário com os dados do estudante
+        # cria um dicionário com os dados do estudante
         chamador_menu_secundario[codigo] = {texto2: nome, texto3: cpf}
         while True:
             adicionar_mais = int(
@@ -239,9 +246,9 @@ def listar_registros(chamador_menu_secundario, nome_opção):
 
 
 def exclui_registros(chamador_menu_secundario):
-    """_Esta função exclui o aluno do RA selecionado do dicinário_"""
+    """_Esta função exclui o aluno do RA selecionado do dicionário_"""
     codigo_aluno = int(input("Digite o Ra do aluno a ser Excluido: "))
-    # através do metodo pop() busca-se m aluno pela chave RA e o exclui,
+    # através do método pop() busca-se m aluno pela chave RA e o exclui,
     # caso o aluno não exista, o programa retorna "RA não encontrado"
     codigo_excluido = chamador_menu_secundario.pop(codigo_aluno, "")
     if codigo_excluido == "":
@@ -250,15 +257,15 @@ def exclui_registros(chamador_menu_secundario):
         print(f"O aluno {codigo_excluido} foi excluido com sucesso.")
 
 
-def atualizar_registros(chamador_menu_secundario, nome_novo, texto1, texto2, texto3):
-    """_Esta função atualiza o aluno do RA selecionado do dicinário_"""
+def atualizar_registros(chamador_menu_secundario, nome_novo, texto1, texto2):
+    """_Esta função atualiza o aluno do RA selecionado do dicionário_"""
     while True:
         try:
             codigo = int(
                 input(
-                    f"""
-        ===========Inserindo {nome_novo}===========
-        Digite o {texto1}: 
+                    """
+        ===========Inserindo Código===========
+        Digite o Código: 
         =========================================
         """
                 )
@@ -270,7 +277,7 @@ def atualizar_registros(chamador_menu_secundario, nome_novo, texto1, texto2, tex
         nome = input(
             f"""
     ===========Inserindo {nome_novo}===========
-    Digite o novo {texto2}: 
+    Digite o novo {texto1}: 
     =========================================
     """
         )
@@ -278,13 +285,13 @@ def atualizar_registros(chamador_menu_secundario, nome_novo, texto1, texto2, tex
         cpf = input(
             f"""
     ===========Inserindo {nome_novo}===========
-    Digite o novo {texto3}: 
+    Digite o novo {texto2}: 
     =========================================
     """
         )
-        # Atualiza através do metodo update()
+        # Atualiza através do método update()
         # o nome e o email do aluno sem alterar o RA
-        chamador_menu_secundario[codigo].update({texto2: nome, texto3: cpf})
+        chamador_menu_secundario[codigo].update({texto1: nome, texto2: cpf})
         break
 
 
