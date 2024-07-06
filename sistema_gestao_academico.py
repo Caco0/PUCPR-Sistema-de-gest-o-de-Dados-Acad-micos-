@@ -44,26 +44,62 @@ def menu_secundario(opcao):
 
         if caso == 1:
             if menu_nome == "Estudante":
-                cadastro_geral(chamador_menu_secundario)
+                cadastro_geral(
+                    chamador_menu_secundario,
+                    "Estudante",
+                    "o código do Estudante",
+                    "nome do Estudante",
+                    "CPF",
+                )
+                grava_arquivos(chamador_menu_secundario, "estudantes")
             elif menu_nome == "Disciplinas":
-                cadastro_geral(chamador_menu_secundario)
+                cadastro_geral(
+                    chamador_menu_secundario,
+                    "Disciplina",
+                    "o código do Disciplina",
+                    "nome da Disciplina",
+                    "aplicável em qtos Cursos",
+                )
+                grava_arquivos(chamador_menu_secundario, "disciplinas")
             elif menu_nome == "Professor":
-                cadastro_geral(chamador_menu_secundario)
+                cadastro_geral(
+                    chamador_menu_secundario,
+                    "Professor",
+                    "o código do Professor",
+                    "nome do Professor",
+                    "responsável por qtas turmas",
+                )
+                grava_arquivos(chamador_menu_secundario, "professores")
             elif menu_nome == "Turma":
-                cadastro_geral(chamador_menu_secundario)
+                cadastro_geral(
+                    chamador_menu_secundario,
+                    "Turma",
+                    "o código do Turma",
+                    "o tipo do Curso",
+                    "o Nome do Curso",
+                )
+                grava_arquivos(chamador_menu_secundario, "turmas")
             else:
-                cadastro_geral(chamador_menu_secundario)
+                cadastro_geral(
+                    chamador_menu_secundario,
+                    "Matrícula",
+                    "o código Matrícula",
+                    "o código do Estudante",
+                    "está habilitado para bolsa?",
+                )
+                grava_arquivos(chamador_menu_secundario, "matriculas")
+
         elif caso == 2:
             if menu_nome == "Estudante":
-                listar_registros(chamador_menu_secundario)
+                listar_registros(chamador_menu_secundario, "Estudantes")
             elif menu_nome == "Disciplinas":
-                listar_registros(chamador_menu_secundario)
+                listar_registros(chamador_menu_secundario, "Disciplinas")
             elif menu_nome == "Professor":
-                listar_registros(chamador_menu_secundario)
+                listar_registros(chamador_menu_secundario, "Professores")
             elif menu_nome == "Turma":
-                listar_registros(chamador_menu_secundario)
+                listar_registros(chamador_menu_secundario, "Turmas")
             else:
-                listar_registros(chamador_menu_secundario)
+                listar_registros(chamador_menu_secundario, "Matriculas")
         elif caso == 3:
             if menu_nome == "Estudante":
                 atualizar_registros(chamador_menu_secundario)
@@ -96,16 +132,22 @@ def menu_secundario(opcao):
     return chamador_menu_secundario
 
 
-def cadastro_geral(chamador_menu_secundario):
+def cadastro_geral(
+    chamador_menu_secundario,
+    nome_novo,
+    texto1,
+    texto2,
+    texto3,
+):
     """_Função que grava o nome do estudante na lista_"""
     while True:
         # cria as variáveis nome, ra, e email e as solicita
         try:
             codigo = int(
                 input(
-                    """
-===========Inserindo Registro===========
-Digite o Código do estudante: 
+                    f"""
+===========Inserindo {nome_novo}===========
+Digite {texto1}: 
 =========================================
 """
                 )
@@ -119,27 +161,27 @@ Digite o Código do estudante:
             print("Voltando ao Menu Estudante...")
             break
         nome = input(
-            """
-===========Inserindo Estudante===========
-Digite o Nome do estudante: 
+            f"""
+===========Inserindo {nome_novo}===========
+Digite {texto2}: 
 =========================================
 """
         )
         cpf = input(
-            """
-===========Inserindo Estudante===========
-Digite o CPF do estudante: 
+            f"""
+===========Inserindo {nome_novo}===========
+Digite {texto3}: 
 =========================================
 """
         )
         # cria um dcionário com os dados do estudante
-        chamador_menu_secundario[codigo] = {"Nome": nome, "CPF": cpf}
+        chamador_menu_secundario[codigo] = {texto2: nome, texto3: cpf}
         while True:
             adicionar_mais = int(
                 input(
-                    """
-===========Inserindo Estudante===========
-    [0] Voltar [1] Adicionar estudante 
+                    f"""
+===========Inserindo {nome_novo}===========
+    [0] Voltar [1] Adicionar {nome_novo} 
 =========================================
 """
                 )
@@ -150,20 +192,16 @@ Digite o CPF do estudante:
                 break
         if adicionar_mais == 0:
             print("Voltando...")
-            # grava_arquivo_estudantes(estudantes, "estudantes")
             break
 
 
-def listar_registros(chamador_menu_secundario):
+def listar_registros(chamador_menu_secundario, nome_opção):
     """_Função de Listagem de Alunos_"""
     if len(chamador_menu_secundario) == 0:
         print("Nenhum estudante cadastrado na memória: ")
     else:
         for chave, valor in chamador_menu_secundario.items():
-            print(f"Estudantes na memória{chave}, {valor}")
-
-    # lista_de_estudantes = ler_arquivo_estudantes("estudantes")
-    # print(f"Estudantes salvos: \n{lista_de_estudantes}")
+            print(f"{nome_opção} na memória{chave}, {valor}")
 
 
 def exclui_registros(chamador_menu_secundario):
@@ -216,18 +254,18 @@ def atualizar_registros(chamador_menu_secundario):
         break
 
 
-def grava_arquivo_estudantes(estudantes, file):
+def grava_arquivos(chamador_menu_secundario, file):
     """_Esta função grava o dicionário em um arquivo estudantes.json_"""
     with open(file + ".json", "w", encoding="utf-8") as f:
-        json.dump(estudantes, f, ensure_ascii=False, indent=4)
+        json.dump(chamador_menu_secundario, f, ensure_ascii=False, indent=4)
         f.close()
 
 
-def ler_arquivo_estudantes(estudantes):
+def ler_arquivo(chamador_menu_secundario):
     """_Esta função lê o arquivo estudantes.json_"""
     estudantes_arquivados = {}
     try:
-        with open(estudantes + ".json", "r") as f:
+        with open(chamador_menu_secundario + ".json", "r") as f:
             estudantes_arquivados = json.load(f)
             f.close()
             return estudantes_arquivados
