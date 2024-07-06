@@ -88,40 +88,74 @@ def menu_secundario(opcao):
                     "está habilitado para bolsa?",
                 )
                 grava_arquivos(chamador_menu_secundario, "matriculas")
-
         elif caso == 2:
             if menu_nome == "Estudante":
+                ler_arquivo("estudantes")
                 listar_registros(chamador_menu_secundario, "Estudantes")
             elif menu_nome == "Disciplinas":
+                ler_arquivo("disciplinas")
                 listar_registros(chamador_menu_secundario, "Disciplinas")
             elif menu_nome == "Professor":
+                ler_arquivo("professores")
                 listar_registros(chamador_menu_secundario, "Professores")
             elif menu_nome == "Turma":
+                ler_arquivo("turmas")
                 listar_registros(chamador_menu_secundario, "Turmas")
             else:
+                ler_arquivo("matriculas")
                 listar_registros(chamador_menu_secundario, "Matriculas")
         elif caso == 3:
             if menu_nome == "Estudante":
-                atualizar_registros(chamador_menu_secundario)
+                atualizar_registros(
+                    chamador_menu_secundario,
+                    "código do Estudante",
+                    "nome do Estudante",
+                    "CPF",
+                )
+                grava_arquivos(chamador_menu_secundario, "estudante")
             elif menu_nome == "Disciplinas":
-                atualizar_registros(chamador_menu_secundario)
+                atualizar_registros(
+                    chamador_menu_secundario,
+                    "código do Disciplina",
+                    "nome da Disciplina",
+                    "aplicável em qtos Cursos",
+                )
+                grava_arquivos(chamador_menu_secundario, "disciplinas")
             elif menu_nome == "Professor":
-                atualizar_registros(chamador_menu_secundario)
+                atualizar_registros(
+                    chamador_menu_secundario,
+                    "código do Professor",
+                    "nome do Professor",
+                    "responsável por qtas turmas",
+                )
+                grava_arquivos(chamador_menu_secundario, "professor")
             elif menu_nome == "Turma":
-                atualizar_registros(chamador_menu_secundario)
+                atualizar_registros(
+                    chamador_menu_secundario,
+                    "código do Turma",
+                    "tipo do Curso",
+                    "Nome do Curso",
+                )
+                grava_arquivos(chamador_menu_secundario, "turma")
             else:
-                atualizar_registros(chamador_menu_secundario)
+                atualizar_registros(
+                    chamador_menu_secundario,
+                    "código Matrícula",
+                    "código do Estudante",
+                    "está habilitado para bolsa?",
+                )
+                grava_arquivos(chamador_menu_secundario, "matricula")
         elif caso == 4:
             if menu_nome == "Estudante":
-                exclui_registros(chamador_menu_secundario)
+                exclui_registros(chamador_menu_secundario, "Estudante")
             elif menu_nome == "Disciplinas":
-                exclui_registros(chamador_menu_secundario)
+                exclui_registros(chamador_menu_secundario, "Diciplina")
             elif menu_nome == "Professor":
-                exclui_registros(chamador_menu_secundario)
+                exclui_registros(chamador_menu_secundario, "Professor")
             elif menu_nome == "Turma":
-                exclui_registros(chamador_menu_secundario)
+                exclui_registros(chamador_menu_secundario, "Turma")
             else:
-                exclui_registros(chamador_menu_secundario)
+                exclui_registros(chamador_menu_secundario, "Matricula")
         elif caso < 0 or caso >= 5:
             print("Opção inválida")
         elif caso == 0:
@@ -216,15 +250,15 @@ def exclui_registros(chamador_menu_secundario):
         print(f"O aluno {codigo_excluido} foi excluido com sucesso.")
 
 
-def atualizar_registros(chamador_menu_secundario):
+def atualizar_registros(chamador_menu_secundario, nome_novo, texto1, texto2, texto3):
     """_Esta função atualiza o aluno do RA selecionado do dicinário_"""
     while True:
         try:
             codigo = int(
                 input(
-                    """
-        ===========Inserindo Estudante===========
-        Digite o Código do estudante: 
+                    f"""
+        ===========Inserindo {nome_novo}===========
+        Digite o {texto1}: 
         =========================================
         """
                 )
@@ -233,24 +267,24 @@ def atualizar_registros(chamador_menu_secundario):
             print("Erro somente números são permitidos")
             # Pede o novo nome do aluno
             continue
-        nome_novo = input(
-            """
-    ===========Inserindo Estudante===========
-    Digite o novo Nome do estudante: 
+        nome = input(
+            f"""
+    ===========Inserindo {nome_novo}===========
+    Digite o novo {texto2}: 
     =========================================
     """
         )
         # Pede o novo email do aluno
-        cpf_novo = input(
-            """
-    ===========Inserindo Estudante===========
-    Digite o novo CPF estudante: 
+        cpf = input(
+            f"""
+    ===========Inserindo {nome_novo}===========
+    Digite o novo {texto3}: 
     =========================================
     """
         )
         # Atualiza através do metodo update()
         # o nome e o email do aluno sem alterar o RA
-        chamador_menu_secundario[codigo].update({"Nome": nome_novo, "CPF": cpf_novo})
+        chamador_menu_secundario[codigo].update({texto2: nome, texto3: cpf})
         break
 
 
@@ -261,14 +295,14 @@ def grava_arquivos(chamador_menu_secundario, file):
         f.close()
 
 
-def ler_arquivo(chamador_menu_secundario):
+def ler_arquivo(arquivo):
     """_Esta função lê o arquivo estudantes.json_"""
     estudantes_arquivados = {}
     try:
-        with open(chamador_menu_secundario + ".json", "r") as f:
+        with open(arquivo + ".json", "r") as f:
             estudantes_arquivados = json.load(f)
             f.close()
-            return estudantes_arquivados
+            print(estudantes_arquivados)
     except FileNotFoundError:
         print("Arquivo não encontrado")
 
