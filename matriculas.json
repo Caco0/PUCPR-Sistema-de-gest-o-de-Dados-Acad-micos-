@@ -1,10 +1,10 @@
 {
     "1": {
-        "Nome": "2",
-        "CPF": "sim "
+        "Código do Estudante": "1,",
+        "Código da Turma": "2"
     },
     "2": {
-        "Nome": "3",
-        "CPF": "não"
+        "Código do Estudante": "2",
+        "Código da Turma": "3"
     }
 }

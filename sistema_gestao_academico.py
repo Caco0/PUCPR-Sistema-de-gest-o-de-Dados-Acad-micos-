@@ -10,18 +10,23 @@ def menu_secundario(opcao):
     """Função secundária do menu recebe como parâmetro o nome da escolha"""
     if opcao == 1:
         menu_nome = "Estudante"
+        estudantes = ler_arquivo("estudantes")
         chamador_menu_secundario = estudantes
     elif opcao == 2:
         menu_nome = "Disciplinas"
+        disciplinas = ler_arquivo("disciplinas")
         chamador_menu_secundario = disciplinas
     elif opcao == 3:
         menu_nome = "Professor"
+        professores = ler_arquivo("professores")
         chamador_menu_secundario = professores
     elif opcao == 4:
         menu_nome = "Turma"
+        turmas = ler_arquivo("turmas")
         chamador_menu_secundario = turmas
     else:
         menu_nome = "Matrícula"
+        matriculas = ler_arquivo("matriculas")
         chamador_menu_secundario = matriculas
 
     while True:
@@ -154,19 +159,19 @@ def menu_secundario(opcao):
         # e imprime na tela o registro apagado
         elif caso == 4:
             if menu_nome == "Estudante":
-                exclui_registros(chamador_menu_secundario, "Estudante")
+                exclui_registros(chamador_menu_secundario, "Estudantes")
                 grava_arquivos(chamador_menu_secundario, "estudantes")
             elif menu_nome == "Disciplinas":
-                exclui_registros(chamador_menu_secundario, "Disciplina")
+                exclui_registros(chamador_menu_secundario, "Disciplinas")
                 grava_arquivos(chamador_menu_secundario, "disciplinas")
             elif menu_nome == "Professor":
-                exclui_registros(chamador_menu_secundario, "Professor")
+                exclui_registros(chamador_menu_secundario, "professores")
                 grava_arquivos(chamador_menu_secundario, "professores")
             elif menu_nome == "Turma":
                 exclui_registros(chamador_menu_secundario, "Turma")
                 grava_arquivos(chamador_menu_secundario, "turmas")
             else:
-                exclui_registros(chamador_menu_secundario, "Matricula")
+                exclui_registros(chamador_menu_secundario, "Matrícula")
                 grava_arquivos(chamador_menu_secundario, "matriculas")
         elif caso < 0 or caso >= 5:
             print("Opção inválida")
@@ -250,30 +255,28 @@ def listar_registros(chamador_menu_secundario, nome_opção):
             print(f"{nome_opção} na memória{chave}, {valor}")
 
 
-def exclui_registros(chamador_menu_secundario):
+def exclui_registros(chamador_menu_secundario, nome_opção):
     """_Esta função exclui o aluno do RA selecionado do dicionário_"""
-    codigo_aluno = int(input("Digite o Ra do aluno a ser Excluido: "))
+    codigo = input("Digite o Ra do aluno a ser Excluido: ")
     # através do método pop() busca-se m aluno pela chave RA e o exclui,
     # caso o aluno não exista, o programa retorna "RA não encontrado"
-    codigo_excluido = chamador_menu_secundario.pop(codigo_aluno, "")
+    codigo_excluido = chamador_menu_secundario.pop(codigo, "")
     if codigo_excluido == "":
         print("Código não encontrado")
     else:
-        print(f"O aluno {codigo_excluido} foi excluido com sucesso.")
+        print(f"O Registro do {nome_opção} {codigo_excluido} foi excluido com sucesso.")
 
 
 def atualizar_registros(chamador_menu_secundario, nome_novo, texto1, texto2):
     """_Esta função atualiza o aluno do RA selecionado do dicionário_"""
     while True:
         try:
-            codigo = int(
-                input(
-                    """
+            codigo = input(
+                """
 =============Inserindo Código============
 Digite o Código: 
 =========================================
         """
-                )
             )
         except:
             print("Erro somente números são permitidos")
@@ -314,20 +317,20 @@ def ler_arquivo(arquivo):
         with open(arquivo + ".json", "r") as f:
             estudantes_arquivados = json.load(f)
             f.close()
-            print(estudantes_arquivados)
+            return estudantes_arquivados
     except FileNotFoundError:
         print("Arquivo não encontrado")
 
 
 """Variáveis globais"""
 
-estudantes = {}
-disciplinas = {}
-professores = {}
-turmas = {}
-matriculas = {}
-adicionar_mais = -1
-aluno = []
+# estudantes = {}
+# disciplinas = {}
+# professores = {}
+# turmas = {}
+# matriculas = {}
+# adicionar_mais = -1
+# aluno = []
 
 
 def menu_sistema_principal():

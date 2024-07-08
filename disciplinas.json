@@ -1,10 +1,10 @@
 {
     "1": {
-        "Nome do Estudante": "Miguel Almeida",
-        "CPF": "456123"
+        "Nome da Disciplina": "Português ",
+        "aplicável em qtos Cursos": "2"
     },
     "2": {
-        "Nome do Estudante": "Milena Beatriz",
-        "CPF": "456123"
+        "Nome da Disciplina": "Matematica",
+        "aplicável em qtos Cursos": "5"
     }
 }
