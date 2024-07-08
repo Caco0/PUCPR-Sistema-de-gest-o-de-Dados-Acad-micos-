@@ -48,7 +48,7 @@ def menu_secundario(opcao):
                 cadastro_geral(
                     chamador_menu_secundario,
                     "Estudante",
-                    "código do Estudante",
+                    "Código do Estudante",
                     "Nome do Estudante",
                     "CPF",
                 )
@@ -57,8 +57,8 @@ def menu_secundario(opcao):
                 cadastro_geral(
                     chamador_menu_secundario,
                     "Disciplina",
-                    "código do Disciplina",
-                    "nome da Disciplina",
+                    "Código do Disciplina",
+                    "Nome da Disciplina",
                     "aplicável em qtos Cursos",
                 )
                 grava_arquivos(chamador_menu_secundario, "disciplinas")
@@ -66,27 +66,27 @@ def menu_secundario(opcao):
                 cadastro_geral(
                     chamador_menu_secundario,
                     "Professor",
-                    "código do Professor",
-                    "nome do Professor",
-                    "responsável por qtas turmas",
+                    "Código do Professor",
+                    "Nome do Professor",
+                    "CPF Professor",
                 )
                 grava_arquivos(chamador_menu_secundario, "professores")
             elif menu_nome == "Turma":
                 cadastro_geral(
                     chamador_menu_secundario,
                     "Turma",
-                    "código do Turma",
-                    "tipo do Curso",
-                    "Nome do Curso",
+                    "Código do Turma",
+                    "Código da Professor",
+                    "Código da Disciplina",
                 )
                 grava_arquivos(chamador_menu_secundario, "turmas")
             else:
                 cadastro_geral(
                     chamador_menu_secundario,
                     "Matrícula",
-                    "código Matrícula",
-                    "código do Estudante",
-                    "está habilitado para bolsa?",
+                    "Código Matrícula",
+                    "Código do Estudante",
+                    "Código da Turma",
                 )
                 grava_arquivos(chamador_menu_secundario, "matriculas")
         # Lê a memória listada por setor específico, e imprime o arquivo
@@ -113,7 +113,7 @@ def menu_secundario(opcao):
             if menu_nome == "Estudante":
                 atualizar_registros(
                     chamador_menu_secundario,
-                    "código do Estudante",
+                    "Código do Estudante",
                     "Nome do Estudante",
                     "CPF",
                 )
@@ -121,33 +121,33 @@ def menu_secundario(opcao):
             elif menu_nome == "Disciplinas":
                 atualizar_registros(
                     chamador_menu_secundario,
-                    "código do Disciplina",
-                    "nome da Disciplina",
+                    "Código do Disciplina",
+                    "Nome da Disciplina",
                     "aplicável em qtos Cursos",
                 )
                 grava_arquivos(chamador_menu_secundario, "disciplinas")
             elif menu_nome == "Professor":
                 atualizar_registros(
                     chamador_menu_secundario,
-                    "código do Professor",
-                    "nome do Professor",
-                    "responsável por qtas turmas",
+                    "Código do Professor",
+                    "Nome do Professor",
+                    "CPF Professor",
                 )
                 grava_arquivos(chamador_menu_secundario, "professores")
             elif menu_nome == "Turma":
                 atualizar_registros(
                     chamador_menu_secundario,
-                    "código do Turma",
-                    "tipo do Curso",
-                    "Nome do Curso",
+                    "Código do Turma",
+                    "Código da Professor",
+                    "Código da Disciplina",
                 )
                 grava_arquivos(chamador_menu_secundario, "turmas")
             else:
                 atualizar_registros(
                     chamador_menu_secundario,
-                    "código Matrícula",
-                    "código do Estudante",
-                    "está habilitado para bolsa?",
+                    "Código Matrícula",
+                    "Código do Estudante",
+                    "Código da Turma",
                 )
                 grava_arquivos(chamador_menu_secundario, "matriculas")
         # seleciona através do código o registro a ser apagado, apaga
@@ -269,9 +269,9 @@ def atualizar_registros(chamador_menu_secundario, nome_novo, texto1, texto2):
             codigo = int(
                 input(
                     """
-        ===========Inserindo Código===========
-        Digite o Código: 
-        =========================================
+=============Inserindo Código============
+Digite o Código: 
+=========================================
         """
                 )
             )
@@ -281,17 +281,17 @@ def atualizar_registros(chamador_menu_secundario, nome_novo, texto1, texto2):
             continue
         nome = input(
             f"""
-    ===========Inserindo {nome_novo}===========
-    Digite o novo {texto1}: 
-    =========================================
+===========Inserindo {nome_novo}===========
+Digite o novo {texto1}: 
+=========================================
     """
         )
         # Pede o novo email do aluno
         cpf = input(
             f"""
-    ===========Inserindo {nome_novo}===========
-    Digite o novo {texto2}: 
-    =========================================
+===========Inserindo {nome_novo}===========
+Digite o novo {texto2}: 
+=========================================
     """
         )
         # Atualiza através do método update()

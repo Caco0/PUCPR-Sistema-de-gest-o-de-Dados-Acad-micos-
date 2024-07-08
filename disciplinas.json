@@ -1,10 +1,10 @@
 {
     "1": {
-        "nome da Disciplina": "Algorítimos Avançados",
-        "aplicável em qtos Cursos": "3"
+        "Nome do Estudante": "Miguel Almeida",
+        "CPF": "456123"
     },
     "2": {
-        "nome da Disciplina": "Machine Learning",
-        "aplicável em qtos Cursos": "2"
+        "Nome do Estudante": "Milena Beatriz",
+        "CPF": "456123"
     }
 }
