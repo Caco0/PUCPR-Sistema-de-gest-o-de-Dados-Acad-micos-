@@ -1,14 +1,20 @@
 {
     "1": {
-        "Nome": "Marco Aurélio",
-        "responsável por qtas turmas:": "3"
+        "Nome": "Marco AurÃ©lio",
+        "responsÃ¡vel por qtas turmas:": "3",
+        "Nome do Professor": "Marco Aurélio",
+        "CPF Professor": "465798"
     },
     "2": {
-        "Nome": "Julio César",
-        "responsável por qtas turmas:": "2"
+        "Nome": "Julio CÃ©sar",
+        "responsÃ¡vel por qtas turmas:": "2"
     },
     "3": {
-        "Nome": "Otávio Augusto",
-        "responsável por qtas turmas:": "4"
+        "Nome": "OtÃ¡vio Augusto",
+        "responsÃ¡vel por qtas turmas:": "4"
+    },
+    "4": {
+        "Nome do Professor": "Calígula da Silva",
+        "CPF Professor": "951753"
     }
 }

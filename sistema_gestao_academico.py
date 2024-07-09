@@ -257,7 +257,7 @@ def listar_registros(chamador_menu_secundario, nome_opção):
 
 def exclui_registros(chamador_menu_secundario, nome_opção):
     """_Esta função exclui o aluno do RA selecionado do dicionário_"""
-    codigo = input("Digite o Ra do aluno a ser Excluido: ")
+    codigo = input("Digite o Código a ser Excluido: ")
     # através do método pop() busca-se m aluno pela chave RA e o exclui,
     # caso o aluno não exista, o programa retorna "RA não encontrado"
     codigo_excluido = chamador_menu_secundario.pop(codigo, "")
